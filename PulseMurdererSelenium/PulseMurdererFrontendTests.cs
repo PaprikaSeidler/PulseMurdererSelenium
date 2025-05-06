@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 namespace PulseMurdererSelenium
 {
     [TestClass]
@@ -32,6 +33,20 @@ namespace PulseMurdererSelenium
             _driver?.Navigate().GoToUrl(url);
 
             Assert.AreEqual("Game Status", _driver?.Title);
+
+            IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
+            inputElementFirst.SendKeys("1");
+
+            IWebElement inputElementSec = _driver.FindElement(By.Id("player2"));
+            inputElementSec.SendKeys("2");
+
+            IWebElement buttonElement = _driver.FindElement(By.Id("button"));
+            buttonElement.Click();
+
+            IWebElement showResultElement = _driver.FindElement(By.Id("showResult"));
+            string resultText = showResultElement.Text;
+
+            Assert.AreEqual(resultText, "The Murderer wins!");
         }
     }
 }
