@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 namespace PulseMurdererSelenium
 {
     [TestClass]
@@ -13,7 +14,8 @@ namespace PulseMurdererSelenium
         public static void setup(TestContext context)
         {
             //_driver = new EdgeDriver(DriverDirectory);
-            _driver = new CromeDriver(DriverDirectory);
+            //_driver = new ChromeDriver(DriverDirectory);
+            _driver = new FirefoxDriver(DriverDirectory);
         }
 
         [ClassCleanup]
