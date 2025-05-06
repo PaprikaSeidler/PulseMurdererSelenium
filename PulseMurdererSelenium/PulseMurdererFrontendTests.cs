@@ -27,12 +27,12 @@ namespace PulseMurdererSelenium
 
         [TestMethod]
 
-        public void TestMethod1()
+        public void MurdererWinsTest()
         {
             string url = "http://127.0.0.1:5500/index.html";
-            _driver?.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
 
-            Assert.AreEqual("Game Status", _driver?.Title);
+            Assert.AreEqual("Game Status", _driver.Title);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
             inputElementFirst.SendKeys("1");
