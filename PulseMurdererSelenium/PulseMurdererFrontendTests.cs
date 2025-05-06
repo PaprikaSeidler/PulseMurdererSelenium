@@ -43,12 +43,9 @@ namespace PulseMurdererSelenium
             IWebElement buttonElement = _driver.FindElement(By.Id("button"));
             buttonElement.Click();
 
-            // Wait for the result element to be updated
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             IWebElement showResultElement = wait.Until(driver => driver.FindElement(By.Id("showResult")));
 
-
-            // Verify the result text
             string resultText = showResultElement.Text;
             Assert.AreEqual("The Murderer wins!", resultText);
         }
