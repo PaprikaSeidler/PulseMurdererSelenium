@@ -16,8 +16,8 @@ namespace PulseMurdererSelenium
         public static void setup(TestContext context)
         {
             //_driver = new EdgeDriver(DriverDirectory);
-            _driver = new ChromeDriver(DriverDirectory);
-            //_driver = new FirefoxDriver(DriverDirectory);
+            //_driver = new ChromeDriver(DriverDirectory);
+            _driver = new FirefoxDriver(DriverDirectory);
         }
 
         [ClassCleanup]
@@ -26,15 +26,25 @@ namespace PulseMurdererSelenium
             _driver?.Dispose();
         }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            IWebDriver? _driver = new FirefoxDriver(DriverDirectory);
+        }
+       
+        [TestMethod]
+        public void TestGameStatusTitle()
+        {
+            string url = "http://127.0.0.1:5500/index.html";
+            _driver.Navigate().GoToUrl(url);
+            Assert.AreEqual("Game Status", _driver.Title);
+        }
 
         [TestMethod]
-
         public void MurdererWinsTest()
         {
             string url = "http://127.0.0.1:5500/index.html";
             _driver.Navigate().GoToUrl(url);
-
-            Assert.AreEqual("Game Status", _driver.Title);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
             inputElementFirst.SendKeys("1");
@@ -50,20 +60,13 @@ namespace PulseMurdererSelenium
 
             string resultText = showResultElement.Text;
             Assert.AreEqual("The Murderer wins!", resultText);
-
         }
 
         [TestMethod]
-
         public void PlayersWinsTest() 
         {
-            //_driver?.Dispose();
-            IWebDriver? _driver = new FirefoxDriver(DriverDirectory);
             string url = "http://127.0.0.1:5500/index.html";
             _driver.Navigate().GoToUrl(url);
-            //_driver.Navigate().Refresh();
-
-            Assert.AreEqual("Game Status", _driver.Title);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
             inputElementFirst.SendKeys("2");
@@ -79,6 +82,28 @@ namespace PulseMurdererSelenium
 
             string resultText = showResultElement.Text;
             Assert.AreEqual("The two players win!", resultText);
+        }
+
+        [TestMethod]
+        public void WrongPlayerTest()
+        {
+            string url = "http://127.0.0.1:5500/index.html";
+            _driver.Navigate().GoToUrl(url);
+
+            IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
+            inputElementFirst.SendKeys("2");
+
+            IWebElement inputElementSec = _driver.FindElement(By.Id("player2"));
+            inputElementSec.SendKeys("6");
+
+            IWebElement buttonElement = _driver.FindElement(By.Id("button"));
+            buttonElement.Click();
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+            IWebElement showResultElement = wait.Until(driver => driver.FindElement(By.Id("showResult")));
+
+            string resultText = showResultElement.Text;
+            Assert.AreEqual("Invalid player IDs. Please try again.", resultText);
         }
 
         //PlayerPage
