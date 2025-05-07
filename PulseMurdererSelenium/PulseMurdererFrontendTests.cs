@@ -3,6 +3,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using static System.Net.WebRequestMethods;
 namespace PulseMurdererSelenium
 {
     [TestClass]
@@ -11,6 +12,7 @@ namespace PulseMurdererSelenium
         private static readonly string DriverDirectory = "c:\\WebDrivers";
         //private static readonly string DriverDirectory = "C:\\web-drivers"; //Paprika
         private static IWebDriver? _driver;
+        public string murdererURL = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/";
 
         [ClassInitialize]
         public static void setup(TestContext context)
@@ -25,17 +27,11 @@ namespace PulseMurdererSelenium
         {
             _driver?.Dispose();
         }
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            IWebDriver? _driver = new FirefoxDriver(DriverDirectory);
-        }
        
         [TestMethod]
         public void TestGameStatusTitle()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = murdererURL + "index.html";
             _driver.Navigate().GoToUrl(url);
             Assert.AreEqual("Game Status", _driver.Title);
         }
@@ -43,7 +39,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void MurdererWinsTest()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = murdererURL + "index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -65,7 +61,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void PlayersWinsTest() 
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = murdererURL + "index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -87,7 +83,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void WrongPlayerTest()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = murdererURL + "index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -110,7 +106,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void TestPlayerPageTitle()
         {
-            string url = "http://127.0.0.1:5500/playerPage.html";
+            string url = murdererURL + "playerPage.html";
             _driver?.Navigate().GoToUrl(url);
             Assert.AreEqual("Player", _driver?.Title);
         }
@@ -118,7 +114,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void TestPlayerVoteButtons()
         {
-            string url = "http://127.0.0.1:5500/playerPage.html";
+            string url = murdererURL + "playerPage.html";
             _driver?.Navigate().GoToUrl(url);
 
             var voterButton = _driver?.FindElements(By.Id("voterButton"));
