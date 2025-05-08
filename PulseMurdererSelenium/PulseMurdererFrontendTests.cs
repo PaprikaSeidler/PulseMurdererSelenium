@@ -35,7 +35,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void TestGameStatusTitle()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html";
             _driver.Navigate().GoToUrl(url);
             Assert.AreEqual("Game Status", _driver.Title);
         }
@@ -43,7 +43,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void MurdererWinsTest()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -65,7 +65,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void PlayersWinsTest() 
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -87,7 +87,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void WrongPlayerTest()
         {
-            string url = "http://127.0.0.1:5500/index.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html";
             _driver.Navigate().GoToUrl(url);
 
             IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
@@ -110,7 +110,7 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void TestPlayerPageTitle()
         {
-            string url = "http://127.0.0.1:5500/playerPage.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/playerPage.html";
             _driver?.Navigate().GoToUrl(url);
             Assert.AreEqual("Player", _driver?.Title);
         }
@@ -118,16 +118,31 @@ namespace PulseMurdererSelenium
         [TestMethod]
         public void TestPlayerVoteButtons()
         {
-            string url = "http://127.0.0.1:5500/playerPage.html";
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/playerPage.html";
             _driver?.Navigate().GoToUrl(url);
 
             var voterButton = _driver?.FindElements(By.Id("voterButton"));
             voterButton[1].Click();
-            Assert.IsTrue(voterButton[1].GetAttribute("class").Contains("btn-success"));
+            Assert.IsTrue(voterButton[1].GetAttribute("class").Contains("chosenButton"));
             Assert.AreEqual("John", voterButton[1].Text);
 
             var voterButton2 = _driver?.FindElements(By.Id("voterButton"));
-            Assert.IsTrue(voterButton[0].GetAttribute("class").Contains("btn-primary"));
+            Assert.IsTrue(voterButton[0].GetAttribute("class").Contains("voteButton"));
+        }
+
+        //QrPage
+        [TestMethod]
+        public void TestQrPage() 
+        {
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/QRPage.html";
+            _driver?.Navigate().GoToUrl(url);
+
+            var QrBtn = _driver?.FindElement(By.Id("qrBtn"));
+            QrBtn?.Click();
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+
+            var QrImg = _driver?.FindElement(By.Id("qrCodeImage"));
+            Assert.IsNotNull(QrImg);
         }
     }
 }
