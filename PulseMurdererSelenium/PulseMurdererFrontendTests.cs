@@ -3,6 +3,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using static System.Net.WebRequestMethods;
 namespace PulseMurdererSelenium
 {
     [TestClass]
@@ -11,6 +12,7 @@ namespace PulseMurdererSelenium
         private static readonly string DriverDirectory = "c:\\WebDrivers";
         //private static readonly string DriverDirectory = "C:\\web-drivers"; //Paprika
         private static IWebDriver? _driver;
+        public string murdererURL = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/";
 
         [ClassInitialize]
         public static void setup(TestContext context)
@@ -24,12 +26,6 @@ namespace PulseMurdererSelenium
         public static void Cleanup()
         {
             _driver?.Dispose();
-        }
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            IWebDriver? _driver = new FirefoxDriver(DriverDirectory);
         }
        
         [TestMethod]
