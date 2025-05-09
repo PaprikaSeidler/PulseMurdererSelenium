@@ -140,5 +140,16 @@ namespace PulseMurdererSelenium
             var QrImg = _driver?.FindElement(By.Id("qrCodeImage"));
             Assert.IsNotNull(QrImg);
         }
+
+        [TestMethod]
+        public void TestUDPData() 
+        {
+            string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/sharedPage.html";
+            _driver?.Navigate().GoToUrl(url);
+            var dataDisplay = _driver?.FindElement(By.Id("data"));
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+            
+            Assert.IsNotNull(dataDisplay);
+        }
     }
 }
