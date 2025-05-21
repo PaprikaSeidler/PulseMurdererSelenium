@@ -54,6 +54,27 @@ namespace PulseMurdererSelenium
         }
 
         [TestMethod]
+        public void TestStartButtonClick()
+        {
+            _driver.Navigate().GoToUrl("https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html");
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+            //var startButton = wait.Until(driver => driver.FindElement(By.Id("btnStart")));
+            //startButton.Click();
+
+        }
+
+        [TestMethod]
+        public void TestResetButtonClick()
+        {
+            _driver.Navigate().GoToUrl("https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html");
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+            //var resetButton = _driver.FindElement(By.Id("btnReset"));
+            //resetButton.Click();
+        }
+
+        [TestMethod]
         public void MurdererWinsTest()
         {
             string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/gameResult.html";
@@ -62,34 +83,23 @@ namespace PulseMurdererSelenium
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
 
             //// Wait for the murderer section to appear
+            //var murdererSection = wait.Until(driver => driver.FindElement(By.Id("murderer-section")));
+            //Assert.IsNotNull(murdererSection);
 
-            //IWebElement murdererSection = wait.Until(driver => driver.FindElement(By.Id("murderer-section")));
-            // Assert.IsNotNull(murdererSection);
+            //// Check for the murderer header (note the typo in the id: "muderer-header")  
+            //var murdererHeader = murdererSection.FindElement(By.Id("muderer-header"));
+            //Assert.IsNotNull(murdererHeader);
+            //Assert.AreEqual("The Murderer Wins!", murdererHeader.Text);
 
-            //// Check for the murderer header(note the typo in the id)
+            //// Check for at least one murderer avatar
+            //var murdererAvatars = murdererSection.FindElements(By.XPath(".//img[@alt='Avatar' and contains(@class, 'rounded-circle')]"));
+            //Assert.IsTrue(murdererAvatars.Count > 0);
 
-            //IWebElement murdererHeader = _driver.FindElement(By.Id("muderer-header"));
-            // Assert.IsNotNull(murdererHeader);
-            // Assert.AreEqual("The Murderer Wins!", murdererHeader.Text);
-
-            //// Check for the murderer's avatar and name (assume first murderer has id=1)
-            //IWebElement murdererAvatar = _driver.FindElement(By.XPath("//div[@id='murderer-section']//div[@class='rounded-circle mx-auto d-block' and @alt='Avatar']"));
-            //Assert.IsNotNull(murdererAvatar);
-
-            //IWebElement murdererName = _driver.FindElement(By.XPath("//div[@id='murderer-section']//h2"));
-            //Assert.IsNotNull(murdererName);
-            //Assert.IsTrue(murdererName.Text.Contains("The Murderer") || murdererName.Text.Length > 0);
-
-            //// Check for at least one civilian avatar (assume civilian has id=2)
-            //IWebElement civilianAvatar = _driver.FindElement(By.XPath("//img[starts-with(@id, 'civilian-avatar-')]"));
-            //Assert.IsNotNull(civilianAvatar);
-
-           // Optionally, check for civilian name
-
-           //IWebElement civilianName = civilianAvatar.FindElement(By.XPath("./following-sibling::div"));
-           // Assert.IsNotNull(civilianName);
-           // Assert.IsTrue(civilianName.Text.Length > 0);
+            //// Check for at least one civilian avatar
+            //var civilianAvatars = murdererSection.FindElements(By.XPath(".//img[starts-with(@id, 'civilian-avatar-')]"));
+            //Assert.IsTrue(civilianAvatars.Count > 0);
         }
+
 
 
         [TestMethod]
@@ -120,21 +130,28 @@ namespace PulseMurdererSelenium
             string url = "https://pulsemurderer-bqaqacc5feh8h3aa.northeurope-01.azurewebsites.net/index.html";
             _driver.Navigate().GoToUrl(url);
 
-            //IWebElement inputElementFirst = _driver.FindElement(By.Id("player1"));
+            //WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+
+            //// Wait for and fill player1 input
+            //var inputElementFirst = wait.Until(driver => driver.FindElement(By.Id("player1")));
+            //inputElementFirst.Clear();
             //inputElementFirst.SendKeys("2");
 
-            //IWebElement inputElementSec = _driver.FindElement(By.Id("player2"));
+            //// Wait for and fill player2 input
+            //var inputElementSec = wait.Until(driver => driver.FindElement(By.Id("player2")));
+            //inputElementSec.Clear();
             //inputElementSec.SendKeys("6");
 
-            //IWebElement buttonElement = _driver.FindElement(By.Id("button"));
+            //// Wait for and click the submit button
+            //var buttonElement = wait.Until(driver => driver.FindElement(By.Id("button")));
             //buttonElement.Click();
 
-            //WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            //IWebElement showResultElement = wait.Until(driver => driver.FindElement(By.Id("showResult")));
-
+            //// Wait for and check the result
+            //var showResultElement = wait.Until(driver => driver.FindElement(By.Id("showResult")));
             //string resultText = showResultElement.Text;
             //Assert.AreEqual("Invalid player IDs. Please try again.", resultText);
         }
+
 
         //PlayerPage
         [TestMethod]
